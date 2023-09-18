@@ -31,8 +31,8 @@ function AnimalShow({animal}){
     <div className="animal-show" onClick={handleClick}>
         <img 
         className="animal"
-        alt= "animal" s
-        rc={svgMap[animal]}
+        alt= "animal" 
+        src={svgMap[animal]}
         />
 
         <img 
