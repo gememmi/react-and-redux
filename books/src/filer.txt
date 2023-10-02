@@ -1,0 +1,53 @@
+NOTES ON .FILTER:
+
+Filter will always return a new array
+
+Removing an element with a particular value:
+
+const [colors, setColors] = useState(['red','blue','green']);
+
+const removeColor = (colorToRemove) => {
+    const updatedColors = colors.filter((color) => {
+        return color !== colorToRemove;
+    })
+    setColors(updatedColors);
+}
+
+FILTER KEEPS TRUE
+
+REMOVING AN ELEMENT WITH A PARTICULAR QUALITY:
+
+const removeBookById = (id) => {
+    return book.id !== 2;
+}
+
+REMOVE A COLOR BY ITS INDEX:
+
+const [colors, setColors] = useState(['red','blue','green']);
+
+const colorToRemoveAtIndex = (indexToRemove) => {
+    const updatedColors = colors.filter((color,index) => {
+        return index !== indexToRemove;
+    })
+    setColors(updatedColors);
+}
+
+ARRAY OF OBJECTS, FIND AN OJBECT AND UPDATE ONES OF ITS QUALITIES:
+
+const [books, setBooks] = useState([
+    { id: 1, title: 'Harry Potter'}
+    { id: 2, title: 'The Dark Tower'}
+    ])
+
+    const updatedBookByID = (id, newTitle) => {
+        const updatedBooks = books.map((book) => {
+            if (book.id === id){
+            return {...book, title: newTitle};
+            }
+            return book;
+        })
+        setBooks(updatedBooks)
+    };
+
+    REMOVING PROPERTIES FROM AN OBJECT:
+    
