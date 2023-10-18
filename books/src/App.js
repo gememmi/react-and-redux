@@ -1,75 +1,31 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import BookCreate from './components/BookCreate';
-import BookList from './components/BookList';
+import { useEffect, useContext } from "react";
+import BookCreate from "./components/BookCreate";
+import BookList from "./components/BookList";
+import BooksContext from "./context/book";
 
 function App() {
-    const [books, setBooks] = useState([]);
+  // reaching up to BooksContext and just grabbing the fetchBooks function
+  const { fetchBooks } = useContext(BooksContext);
 
-    //GET all the books in our db.json
-    const fetchBooks = async () => {
-        const response = await axios.get('http://localhost:3001/books');
+  //call GET request only when the page first renders
+  useEffect(() => {
+    fetchBooks();
+  }, []);
 
-        setBooks(response.data);
-    };
-    //call GET request only when the page first renders
-    useEffect (() => {
-        fetchBooks();
-    }, []);
-
-    //POST request to db.json
-    const createBook = async (title) => {
-        const response = await axios.post('http://localhost:3001/books',{
-            title
-        });
-        const updatedBooks = [
-            ...books,
-            response.data
-        ];
-        setBooks(updatedBooks);
-        
-    };
-    //DELETE request to db.json
-    const deleteBookById = async (id) => {
-        await axios.delete(`http://localhost:3001/books/${id}`);
-       const updatedBooks = books.filter((book) => {
-            return book.id !== id;
-        })
-        setBooks(updatedBooks);
-    };
-
-    //PUT request to db.json
-    const editBookById = async (id, newTitle) => {
-       const response = await axios.put(`http://localhost:3001/books/${id}`, {
-            title: newTitle
-        });
-        console.log(response)
-
-        const updatedBooks = books.map((book) => {
-            if (book.id === id ) {
-                return {...book, ...response.data};
-            }
-            return book;
-        })
-        setBooks(updatedBooks);
-    }
-        
-    return (
+  return (
     <div>
-        <div className= "app">
-            <h1>Reading List</h1>
-            <BookList books={books} onDelete={deleteBookById} onEdit={editBookById}/>
-            <BookCreate  onCreate = {createBook} />
-        </div>
-        
-        
+      <div className="app">
+        <h1>Reading List</h1>
+        <BookList />
+        <BookCreate />
+      </div>
     </div>
-    );
+  );
 }
 
 export default App;
 
-// Adding and editing information on the DOM 
+// Adding and editing information on the DOM
 
 // To update state with a new object, add a new object to the empty array in our state:
 //CREATE A NEW ARRAY
@@ -90,7 +46,7 @@ export default App;
 // HOW TO REMOVE AN ELEMENT FROM USING .FILTER
 
 // USEEFFECT:
-// USED TO RUN CODE AT VERY  SPECIFIC TIMES, LIKE WHEN THE COMPONENT IS INTIALLY RENDERED. AND SOMETIMES WHEN IT IS RERENDERED. 
+// USED TO RUN CODE AT VERY  SPECIFIC TIMES, LIKE WHEN THE COMPONENT IS INTIALLY RENDERED. AND SOMETIMES WHEN IT IS RERENDERED.
 //The first argument is a function that contains code we want to run and the second is an array or nothing -- this controls whether the funciton is executed on rerenders. So it should either be an empty array or have some numbers in it
 //When does the arrow function get called?-- Immediately after the first render, any other times depends on the second argument (empty array or not)
 //What is the arrow functions return value?
