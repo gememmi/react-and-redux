@@ -10,7 +10,7 @@ function App() {
   //call GET request only when the page first renders
   useEffect(() => {
     fetchBooks();
-  }, []);
+  }, [ ]);
 
   return (
     <div>
