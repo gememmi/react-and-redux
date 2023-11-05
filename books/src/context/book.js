@@ -4,7 +4,9 @@ import axios from "axios";
 const BooksContext = createContext();
 
 function Provider({ children }) {
+  console.log("Provider is rendeirng....")
   const [books, setBooks] = useState([]);
+  
 
   //GET all the books in our db.json
   const fetchBooks = async () => {
@@ -12,6 +14,7 @@ function Provider({ children }) {
 
     setBooks(response.data);
   };
+ 
 
   //POST request to db.json
   const createBook = async (title) => {
@@ -52,7 +55,7 @@ function Provider({ children }) {
     createBook,
     fetchBooks,
   };
-  return <BooksContext.Provider value={ valueToShare}>{children}</BooksContext.Provider>;
+  return <BooksContext.Provider value ={ valueToShare}>{children}</BooksContext.Provider>;
 }
 
 export { Provider };

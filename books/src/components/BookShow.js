@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react';
 import BookEdit from './BookEdit';
-import BooksContext from '../context/book'
+import BooksContext from '../context/book';
 
 function BookShow({ book }){
     const [showEdit, setShowEdit] = useState(false);
