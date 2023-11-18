@@ -1,25 +1,20 @@
-import { useEffect, useContext } from "react";
-import BookCreate from "./components/BookCreate";
-import BookList from "./components/BookList";
-import BooksContext from "./context/book"; 
+import { useEffect, useContext } from 'react';
+import BookCreate from './components/BookCreate';
+import BookList from './components/BookList';
+import BooksContext from './context/book';
 
 function App() {
-  console.log("App is re")
-  // reaching up to BooksContext and just grabbing the fetchBooks function
   const { fetchBooks } = useContext(BooksContext);
 
-  //call GET request only when the page first renders
   useEffect(() => {
     fetchBooks();
   }, []);
 
   return (
-    <div>
-      <div className="app">
-        <h1>Reading List</h1>
-        <BookList />
-        <BookCreate />
-      </div>
+    <div className="app">
+      <h1>Reading List</h1>
+      <BookList />
+      <BookCreate />
     </div>
   );
 }

@@ -1,39 +1,17 @@
-import { createContext, useState } from "react";
-import axios from "axios";
+import { createContext, useState } from 'react';
+import axios from 'axios';
 
 const BooksContext = createContext();
 
 function Provider({ children }) {
-  console.log("Provider is rendeirng....")
   const [books, setBooks] = useState([]);
   
-
-  //GET all the books in our db.json
   const fetchBooks = async () => {
-    const response = await axios.get("http://localhost:3001/books");
+    const response = await axios.get('http://localhost:3001/books');
 
     setBooks(response.data);
   };
- 
 
-  //POST request to db.json
-  const createBook = async (title) => {
-    const response = await axios.post("http://localhost:3001/books", {
-      title,
-    });
-    const updatedBooks = [...books, response.data];
-    setBooks(updatedBooks);
-  };
-  //DELETE request to db.json
-  const deleteBookById = async (id) => {
-    await axios.delete(`http://localhost:3001/books/${id}`);
-    const updatedBooks = books.filter((book) => {
-      return book.id !== id;
-    });
-    setBooks(updatedBooks);
-  };
-
-  //PUT request to db.json
   const editBookById = async (id, newTitle) => {
     const response = await axios.put(`http://localhost:3001/books/${id}`, {
       title: newTitle,
@@ -44,7 +22,23 @@ function Provider({ children }) {
         return { ...book, ...response.data };
       }
       return book;
+    });    
+    setBooks(updatedBooks);
+  };
+
+    const deleteBookById = async (id) => {
+      await axios.delete(`http://localhost:3001/books/${id}`);
+      const updatedBooks = books.filter((book) => {
+        return book.id !== id;
+      });
+      setBooks(updatedBooks);
+    };
+
+  const createBook = async (title) => {
+    const response = await axios.post('http://localhost:3001/books', {
+      title,
     });
+    const updatedBooks = [...books, response.data];
     setBooks(updatedBooks);
   };
 
@@ -55,7 +49,11 @@ function Provider({ children }) {
     createBook,
     fetchBooks,
   };
-  return <BooksContext.Provider value ={ valueToShare}>{children}</BooksContext.Provider>;
+  return (
+  <BooksContext.Provider value={valueToShare}>
+    {children}
+    </BooksContext.Provider>
+    );
 }
 
 export { Provider };
