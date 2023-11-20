@@ -1,34 +1,34 @@
-import Button from './Button';
-import { GoBell } from "react-icons/go";
+
+import Accordion from './components/Accordion';
 
 function App() {
+    const items = [
+        {
+            id:"a",
+            label: 'heeeyyy',
+            constent: 'what is up'
+        },
+        {
+            id:"b",
+            label: 'heeeyyy',
+            constent: 'what is up'
+        },
+        {
+            id:"c",
+            label: 'heeeyyy',
+            constent: 'what is up'
+        },
+    ]
 
-    return <div>
+    
+    return (
         <div>
-            <Button primary outline className="mb-5" >
-                <GoBell/>
-                Hello
-                </Button>
+        <Accordion items={items} />
         </div>
-        <div>
-            <Button secondary outline >
-            <GoBell/>
-                What the heck is up
-                </Button>
-        </div>
-        <div>
-            <Button warning rounded >Barf</Button>
-        </div>
-        <div>
-            <Button danger >I LVOE YOU</Button>
-        </div>
-        <div>
-            <Button success >UMMMM ok</Button>
-        </div>
-        <div>
-            <Button rounded>nasty</Button>
-        </div>
-    </div>
+        )
+    
 }
+
+
 
 export default App;
