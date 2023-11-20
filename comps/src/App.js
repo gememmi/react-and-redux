@@ -2,15 +2,19 @@ import Button from './Button';
 import { GoBell } from "react-icons/go";
 
 function App() {
+
     return <div>
         <div>
-            <Button primary outline >
-                <GoBell />
+            <Button primary outline className="mb-5" >
+                <GoBell/>
                 Hello
                 </Button>
         </div>
         <div>
-            <Button secondary outline >What the heck is up</Button>
+            <Button secondary outline >
+            <GoBell/>
+                What the heck is up
+                </Button>
         </div>
         <div>
             <Button warning rounded >Barf</Button>
